@@ -429,6 +429,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     @Override
     public boolean onClick(@NonNull Overlay overlay) {
+        Log.d("RN.NMap","Overlay");
         if (overlay instanceof Marker) {
             WritableMap param = Arguments.createMap();
             param.putDouble("x", ((Marker) overlay).getAnchor().x);
