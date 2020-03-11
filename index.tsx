@@ -78,6 +78,12 @@ export interface NaverMapViewProps {
         latitude: number;
         longitude: number;
     }) => void;
+    onMarkerClick?: (event: {
+        x: number;
+        y: number;
+        latitude: number;
+        longitude: number;
+    }) => void;
     onTouch?: () => void;
     showsMyLocationButton?: boolean;
     compass?: boolean;
