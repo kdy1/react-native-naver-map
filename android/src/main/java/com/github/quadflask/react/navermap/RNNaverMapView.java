@@ -354,6 +354,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
             final RNNaverMapMarker v = (RNNaverMapMarker) view;
             final Marker marker= v.getFeature();
 
+            Log.d("RN.NMap","I HATE THIS");
+
             WritableMap param = Arguments.createMap();
             param.putDouble("x", marker.getAnchor().x);
             param.putDouble("y", marker.getAnchor().y);
@@ -369,7 +371,6 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 RNNaverMapMarker annotation = (RNNaverMapMarker) child;
                 annotation.setOnClickListener(MARKER_CLICK_LISTENER);
                 annotation.addToMap(this);
-                Log.d("RN.NMap","I HATE THIS");
                 features.add(index, annotation);
                 markerMap.put(annotation.getFeature(), annotation);
             } else if (child instanceof RNNaverMapCircleOverlay) {
