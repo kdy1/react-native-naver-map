@@ -370,6 +370,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
             if (child instanceof RNNaverMapMarker) {
                 RNNaverMapMarker annotation = (RNNaverMapMarker) child;
                 annotation.setOnClickListener(MARKER_CLICK_LISTENER);
+                annotation.getFeature().setOnClickListener(this);
                 annotation.addToMap(this);
                 features.add(index, annotation);
                 markerMap.put(annotation.getFeature(), annotation);
