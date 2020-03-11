@@ -283,7 +283,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
 
     @Override
     public void addView(RNNaverMapView parent, View child, int index) {
-        Log.d("RN.NaverMap","Add child "+index);
+        Log.d("RN.NaverMap","Add child "+parent+child+index);
         parent.addFeature(child, index);
     }
 
