@@ -369,6 +369,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 RNNaverMapMarker annotation = (RNNaverMapMarker) child;
                 annotation.setOnClickListener(MARKER_CLICK_LISTENER);
                 annotation.addToMap(this);
+                Log.d("RN.NMap","I HATE THIS");
                 features.add(index, annotation);
                 markerMap.put(annotation.getFeature(), annotation);
             } else if (child instanceof RNNaverMapCircleOverlay) {
