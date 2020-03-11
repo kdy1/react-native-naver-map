@@ -2,6 +2,7 @@ package com.github.quadflask.react.navermap;
 
 import android.app.Activity;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 
 import com.airbnb.android.react.maps.SizeReportingShadowNode;
@@ -282,7 +283,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
 
     @Override
     public void addView(RNNaverMapView parent, View child, int index) {
-         Log.d("RN.NaverMap","Add child "+index);
+        Log.d("RN.NaverMap","Add child "+index);
         parent.addFeature(child, index);
     }
 
