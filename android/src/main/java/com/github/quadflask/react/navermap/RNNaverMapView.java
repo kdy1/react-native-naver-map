@@ -203,8 +203,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
             if (markersArray != null && markersArray.size() > 0) {
                 markers = markersArray;
                 for (Marker marker : markers) {
-                    marker.setMap(naverMap);
                     marker.setOnClickListener(this);
+                    marker.setMap(naverMap);
                 }
             }
         });
