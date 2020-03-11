@@ -348,10 +348,26 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     private final Map<PathOverlay, RNNaverMapPathOverlay> pathOverlayMap = new HashMap<>();
 
+    private final View.OnClickListener MARKER_CLICK_LISTENER =new View .OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            final RNNaverMapMarker v = (RNNaverMapMarker) view;
+            final Marker marker= v.getFeature();
+
+            WritableMap param = Arguments.createMap();
+            param.putDouble("x", marker.getAnchor().x);
+            param.putDouble("y", marker.getAnchor().y);
+            param.putDouble("latitude", marker.getPosition().latitude);
+            param.putDouble("longitude", marker.getPosition().longitude);
+            emitEvent("onMarkerClick",param);
+        }
+    };
+
     public void addFeature(View child, int index) {
         getMapAsync(e -> {
             if (child instanceof RNNaverMapMarker) {
                 RNNaverMapMarker annotation = (RNNaverMapMarker) child;
+                annotation.setOnClickListener(MARKER_CLICK_LISTENER);
                 annotation.addToMap(this);
                 features.add(index, annotation);
                 markerMap.put(annotation.getFeature(), annotation);
