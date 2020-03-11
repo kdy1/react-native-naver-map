@@ -24,6 +24,7 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
@@ -36,11 +37,12 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
-public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
+public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener, Overlay.OnClickListener {
     public static final String[] EVENT_NAMES = new String[]{
             "onInitialized",
             "onCameraChange",
             "onMapClick",
+            "onMarkerClick",
             "onTouch"
     };
 
@@ -202,6 +204,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 markers = markersArray;
                 for (Marker marker : markers) {
                     marker.setMap(naverMap);
+                    marker.setOnClickListener(this);
                 }
             }
         });
@@ -422,5 +425,18 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     public NaverMap getMap() {
         return naverMap;
+    }
+
+    @Override
+    public boolean onClick(@NonNull Overlay overlay) {
+        if (overlay instanceof Marker) {
+            WritableMap param = Arguments.createMap();
+            param.putDouble("x", ((Marker) overlay).getAnchor().x);
+            param.putDouble("y", ((Marker) overlay).getAnchor().y);
+            param.putDouble("latitude", ((Marker) overlay).getPosition().latitude);
+            param.putDouble("longitude", ((Marker) overlay).getPosition().longitude);
+            emitEvent("onMarkerClick", param);
+        }
+        return false;
     }
 }
