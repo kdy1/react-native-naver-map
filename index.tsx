@@ -150,6 +150,13 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         longitude: number;
     }>) => this.props.onMapClick && this.props.onMapClick(event.nativeEvent);
 
+    handleOnMarkerClick = (event: SyntheticEvent<{}, {
+        x: number;
+        y: number;
+        latitude: number;
+        longitude: number;
+    }>) => this.props.onMarkerClick && this.props.onMarkerClick(event.nativeEvent);
+
     render() {
         const {
             onInitialized,
@@ -173,6 +180,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             nightMode={nightMode}
             onCameraChange={this.handleOnCameraChange}
             onMapClick={this.handleOnMapClick}
+            onMarkerClick={this.handleOnMarkerClick}
         />
     }
 }
